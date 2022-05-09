@@ -1,12 +1,16 @@
 import * as React from 'react'
 import { Range, getTrackBackground } from 'react-range'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeMintAmount } from '../../redux/minting/mintingActions'
 
 const STEP = 1
 const MIN = 0
 const MAX = 10
 
 export default function Marks() {
-    const [mintAmount, setMintAmount] = React.useState([3])
+    const dispatch = useDispatch()
+    const minting = useSelector((state) => state.minting)
+
     return (
         <div
             style={{
@@ -16,11 +20,11 @@ export default function Marks() {
             }}
         >
             <Range
-                values={mintAmount}
+                values={minting.mintAmount}
                 step={STEP}
                 min={MIN}
                 max={MAX}
-                onChange={(values) => setMintAmount(values)}
+                onChange={(mintAmount) => dispatch(changeMintAmount({ mintAmount }))}
                 renderMark={({ props, index }) => (
                     <div
                         {...props}
@@ -28,7 +32,7 @@ export default function Marks() {
                             ...props.style,
                             height: '16px',
                             width: '5px',
-                            backgroundColor: index * STEP < mintAmount[0] ? '#C13540' : '#ccc',
+                            backgroundColor: index * STEP < minting.mintAmount ? '#C13540' : '#ccc',
                         }}
                     />
                 )}
@@ -50,7 +54,7 @@ export default function Marks() {
                                 width: '100%',
                                 borderRadius: '4px',
                                 background: getTrackBackground({
-                                    values: mintAmount,
+                                    values: minting.mintAmount,
                                     colors: ['#C13540', '#ccc'],
                                     min: MIN,
                                     max: MAX,
@@ -87,7 +91,7 @@ export default function Marks() {
                     </div>
                 )}
             />
-            <output className="mt-[30px] text-2xl font-bold">{mintAmount[0]}</output>
+            <output className="mt-[30px] text-2xl font-bold">{minting.mintAmount[0]}</output>
         </div>
     )
 }

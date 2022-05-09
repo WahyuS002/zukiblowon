@@ -1,8 +1,11 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export default function Footer() {
+    const minting = useSelector((state) => state.minting)
+
     return (
-        <div className="fixed inset-x-0 bottom-0 bg-primary w-full h-24 text-white">
+        <div className="fixed inset-x-0 bottom-0 bg-primary w-full h-24 text-white z-10">
             {/* Image goes here */}
             <div className="px-12 py-5">
                 <div className="flex justify-between items-center">
@@ -17,7 +20,7 @@ export default function Footer() {
                         </div>
                         <div className="px-10">
                             <span className="uppercase text-white/40 text-xs font-semibold">Amount</span>
-                            <p className="font-medium">1x</p>
+                            <p className="font-medium">{minting.mintAmount[0]}x</p>
                         </div>
                         <div className="px-10">
                             <span className="uppercase text-white/40 text-xs font-semibold">Total</span>
