@@ -88,13 +88,6 @@
         "stateMutability": "view",
         "type": "function"
     },
-    {
-        "inputs": [{ "internalType": "address", "name": "_address", "type": "address" }],
-        "name": "getClaimedWhitelistValue",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-        "stateMutability": "view",
-        "type": "function"
-    },
     { "inputs": [], "name": "hiddenMetadataUri", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "stateMutability": "view", "type": "function" },
     {
         "inputs": [
@@ -111,7 +104,6 @@
     { "inputs": [], "name": "maxFreeMintSupply", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
     { "inputs": [], "name": "maxMintAmountPerTx", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
     { "inputs": [], "name": "maxSupply", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" },
-    { "inputs": [], "name": "merkleRoot", "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }], "stateMutability": "view", "type": "function" },
     { "inputs": [{ "internalType": "uint256", "name": "_mintAmount", "type": "uint256" }], "name": "mint", "outputs": [], "stateMutability": "payable", "type": "function" },
     {
         "inputs": [
@@ -185,12 +177,10 @@
         "stateMutability": "nonpayable",
         "type": "function"
     },
-    { "inputs": [{ "internalType": "bytes32", "name": "_merkleRoot", "type": "bytes32" }], "name": "setMerkleRoot", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
     { "inputs": [{ "internalType": "bool", "name": "_state", "type": "bool" }], "name": "setPaused", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
     { "inputs": [{ "internalType": "bool", "name": "_state", "type": "bool" }], "name": "setRevealed", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
     { "inputs": [{ "internalType": "string", "name": "_uriPrefix", "type": "string" }], "name": "setUriPrefix", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
     { "inputs": [{ "internalType": "string", "name": "_uriSuffix", "type": "string" }], "name": "setUriSuffix", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
-    { "inputs": [{ "internalType": "bool", "name": "_state", "type": "bool" }], "name": "setWhitelistMintEnabled", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
     {
         "inputs": [{ "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }],
         "name": "supportsInterface",
@@ -229,23 +219,5 @@
         "stateMutability": "view",
         "type": "function"
     },
-    {
-        "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
-        "name": "whitelistClaimed",
-        "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            { "internalType": "uint256", "name": "_mintAmount", "type": "uint256" },
-            { "internalType": "bytes32[]", "name": "_merkleProof", "type": "bytes32[]" }
-        ],
-        "name": "whitelistMint",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function"
-    },
-    { "inputs": [], "name": "whitelistMintEnabled", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "stateMutability": "view", "type": "function" },
     { "inputs": [], "name": "withdraw", "outputs": [], "stateMutability": "nonpayable", "type": "function" }
 ]

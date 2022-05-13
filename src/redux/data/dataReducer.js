@@ -10,11 +10,9 @@ const initialState = {
     maxMintAmountPerTx: 0,
 
     isFreeMintOpen: false,
-    whitelistMintEnabled: false,
     paused: false,
 
     totalSupply: 0,
-    getClaimedWhitelistValue: null,
     currentWalletSupply: 0,
 }
 
@@ -41,11 +39,9 @@ const dataReducer = (state = initialState, action) => {
                 maxMintAmountPerTx: action.payload.maxMintAmountPerTx,
 
                 isFreeMintOpen: action.payload.isFreeMintOpen,
-                whitelistMintEnabled: action.payload.whitelistMintEnabled,
                 paused: action.payload.paused,
 
                 totalSupply: action.payload.totalSupply,
-                getClaimedWhitelistValue: action.payload.getClaimedWhitelistValue,
                 currentWalletSupply: action.payload.currentWalletSupply,
             }
         case 'CHECK_DATA_FAILED':

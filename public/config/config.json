@@ -1,13 +1,13 @@
 {
-    "CONTRACT_ADDRESS": "0x90783b24694c0e82b0F5C51997E0915b1293799c",
-    "SCAN_LINK": "https://etherscan.io/address/0x90783b24694c0e82b0F5C51997E0915b1293799c",
+    "CONTRACT_ADDRESS": "0xfB6dc16B2CbB4986ea713766C7C9239C019b9D66",
+    "SCAN_LINK": "https://etherscan.io/address/0xfB6dc16B2CbB4986ea713766C7C9239C019b9D66",
     "NETWORK": {
         "NAME": "Rinkeby",
         "SYMBOL": "ETH",
         "ID": 4
     },
-    "NFT_NAME": "Moonlight Birdy",
-    "SYMBOL": "MB",
+    "NFT_NAME": "Zukiblowon",
+    "SYMBOL": "ZUKIBLOWON",
     "MAX_SUPPLY": "5555",
     "GAS_LIMIT": 285000,
     "MARKETPLACE": "Opensea",

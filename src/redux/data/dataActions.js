@@ -33,14 +33,12 @@ export const fetchData = () => {
             let maxMintAmountPerTx = await store.getState().blockchain.smartContract.methods.maxMintAmountPerTx().call()
 
             let isFreeMintOpen = await store.getState().blockchain.smartContract.methods.isFreeMintOpen().call()
-            let whitelistMintEnabled = await store.getState().blockchain.smartContract.methods.whitelistMintEnabled().call()
             let paused = await store.getState().blockchain.smartContract.methods.paused().call()
 
             let totalSupply = await store.getState().blockchain.smartContract.methods.totalSupply().call()
 
             let currentWallet = await store.getState().blockchain.account
             let walletOfOwner = await store.getState().blockchain.smartContract.methods.walletOfOwner(currentWallet).call()
-            let getClaimedWhitelistValue = await store.getState().blockchain.smartContract.methods.getClaimedWhitelistValue(currentWallet).call()
             let currentWalletSupply = walletOfOwner.length
 
             dispatch(
@@ -52,11 +50,9 @@ export const fetchData = () => {
                     maxMintAmountPerTx,
 
                     isFreeMintOpen,
-                    whitelistMintEnabled,
                     paused,
 
                     totalSupply,
-                    getClaimedWhitelistValue,
                     currentWalletSupply,
                 })
             )
