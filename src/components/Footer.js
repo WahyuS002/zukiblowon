@@ -7,8 +7,12 @@ import { fetchData } from '../redux/data/dataActions'
 import { toast } from 'react-toastify'
 import { motion, AnimatePresence } from 'framer-motion'
 
+import Web3 from 'web3'
+
 import loadingVideo from '../assets/videos/loading.mp4'
 import mintedVideo from '../assets/videos/minted.mp4'
+
+const web3 = new Web3()
 
 export default function Footer() {
     const dispatch = useDispatch()
@@ -190,13 +194,13 @@ export default function Footer() {
             <AnimatePresence initial={false} exitBeforeEnter={true} onExitComplete={() => null}>
                 {claimingNft && (
                     <motion.div
-                        className="fixed top-0 bg-black backdrop-filter backdrop-blur-xl h-screen w-full z-20"
+                        className="fixed bg-black backdrop-filter backdrop-blur-xl h-screen w-full z-20"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5, type: 'tween' }}
                     >
-                        <video autoPlay muted loop>
+                        <video className="absolute top-1/2 md:block md:top-0" autoPlay muted loop>
                             <source src={loadingVideo} type="video/mp4" />
                         </video>
                     </motion.div>
@@ -205,33 +209,33 @@ export default function Footer() {
             <AnimatePresence initial={false} exitBeforeEnter={true} onExitComplete={() => null}>
                 {blockchain.account && blockchain.smartContract && !data.loading ? (
                     <motion.div
-                        className="fixed inset-x-0 bottom-0 bg-primary w-full h-24 text-white z-10"
+                        className="fixed inset-x-0 bottom-0 bg-primary w-full text-white z-10"
                         initial={{ y: 300, opacity: 0 }}
                         animate={{ y: 1, opacity: 1 }}
                         exit={{ y: 300, opacity: 0 }}
                         transition={{ duration: 0.5 }}
                     >
                         <div className="px-12 py-5">
-                            <div className="flex justify-between items-center">
-                                <div>
+                            <div className="flex justify-center md:justify-between items-center">
+                                <div className="hidden md:block">
                                     <h5 className="uppercase text-white/40 text-xs font-semibold">Connected To</h5>
                                     <p>{blockchain.account}</p>
                                 </div>
                                 <div className="flex items-center divide-x divide-white/20">
                                     <div className="pr-10">
                                         <span className="uppercase text-white/40 text-xs font-semibold">Price</span>
-                                        <p className="font-medium">{data.isFreeMintOpen ? 'Free' : data.cost}</p>
+                                        <p className="font-medium">{data.isFreeMintOpen ? 'Free' : web3.utils.fromWei(web3.utils.toBN(data.cost), 'ether') * minting.mintAmount[0]}</p>
                                     </div>
                                     <div className="px-10">
                                         <span className="uppercase text-white/40 text-xs font-semibold">Amount</span>
                                         <p className="font-medium">{minting.mintAmount[0]}x</p>
                                     </div>
-                                    <div className="px-10">
+                                    <div className="pl-10 md:px-10">
                                         <span className="uppercase text-white/40 text-xs font-semibold">Total</span>
-                                        <p className="font-medium">{data.isFreeMintOpen ? 'Free' : data.cost}</p>
+                                        <p className="font-medium">{data.isFreeMintOpen ? 'Free' : web3.utils.fromWei(web3.utils.toBN(data.cost), 'ether') * minting.mintAmount[0]}</p>
                                     </div>
                                     <button
-                                        className="py-3 px-10 rounded-sm font-bold text-lg uppercase bg-white text-primary"
+                                        className="py-3 px-10 rounded-sm font-bold text-lg uppercase bg-white text-primary hidden md:block"
                                         onClick={(e) => {
                                             e.preventDefault()
                                             claimNFTs()
@@ -241,6 +245,20 @@ export default function Footer() {
                                         Mint
                                     </button>
                                 </div>
+                            </div>
+                        </div>
+                        <div className="px-12 pb-3 block md:hidden">
+                            <div className="flex justify-center">
+                                <button
+                                    className="py-3 px-10 rounded-sm font-bold text-lg uppercase bg-white text-primary"
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        claimNFTs()
+                                        getData()
+                                    }}
+                                >
+                                    Mint
+                                </button>
                             </div>
                         </div>
                     </motion.div>

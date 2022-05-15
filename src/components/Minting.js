@@ -63,15 +63,15 @@ export default function Minting() {
     }, [blockchain.account])
 
     return (
-        <div className="flex justify-between items-center">
-            <div className="w-[55%]">
-                <div className="text-lg font-medium uppercase">
+        <div className="flex flex-col-reverse md:flex-row justify-between items-center">
+            <div className="md:w-[55%] mb-52 md:mb-0">
+                <div className="md:text-lg font-medium uppercase">
                     <span className="text-primary">{isWalletConnected() && isContractReady() && !isLoading() ? data.totalSupply : 'XXX'}</span>
                     <span className="text-black/60"> / {CONFIG.MAX_SUPPLY} Zukiblowon Remaining</span>
                 </div>
                 <hr className="my-4" />
                 <>
-                    <h1 className="text-5xl font-bold uppercase leading-tight">
+                    <h1 className="text-3xl md:text-5xl font-bold uppercase leading-tight">
                         {isWalletConnected() && isContractReady() && !isLoading() ? 'Get Your Zukiblowon' : 'Connect To Ethereum Network'}
                         <span className="text-black/10"> //</span>
                     </h1>
@@ -99,7 +99,7 @@ export default function Minting() {
                     </div>
                 </>
             </div>
-            <img className="w-[45%] h-[45%]" src={toyMachineImg} alt="" />
+            <img className="md:w-[45%] h-[45%] mb-10 md:mb-0" src={toyMachineImg} alt="" />
         </div>
     )
 }

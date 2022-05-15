@@ -10,10 +10,10 @@ function App() {
         <div className="relative min-h-screen bg-[#F4F4F4] font-rubik">
             <ToastContainer />
             <Footer />
-            <div className="mx-12 py-8">
+            <div className="mx-4 md:mx-12 py-8">
                 <Navbar />
             </div>
-            <div className="mx-12 -mt-10">
+            <div className="mx-4 md:mx-12 md:-mt-10">
                 <Minting />
             </div>
             <div></div>
