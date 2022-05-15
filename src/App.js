@@ -13,7 +13,7 @@ function App() {
             <div className="mx-12 py-8">
                 <Navbar />
             </div>
-            <div className="mx-12">
+            <div className="mx-12 -mt-10">
                 <Minting />
             </div>
             <div></div>

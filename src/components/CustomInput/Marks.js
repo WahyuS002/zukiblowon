@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { changeMintAmount } from '../../redux/minting/mintingActions'
 
 const STEP = 1
-const MIN = 0
+const MIN = 1
 const MAX = 10
 
 export default function Marks() {

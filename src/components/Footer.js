@@ -5,6 +5,10 @@ import useModal from '../hooks/useModal'
 import { fetchData } from '../redux/data/dataActions'
 
 import { toast } from 'react-toastify'
+import { motion, AnimatePresence } from 'framer-motion'
+
+import loadingVideo from '../assets/videos/loading.mp4'
+import mintedVideo from '../assets/videos/minted.mp4'
 
 export default function Footer() {
     const dispatch = useDispatch()
@@ -139,41 +143,109 @@ export default function Footer() {
 
     return (
         <>
-            {claimingNft ? <div className="absolute top-0 bg-black/80 backdrop-filter backdrop-blur-xl h-full w-full z-20"></div> : null}
-            <div className="fixed inset-x-0 bottom-0 bg-primary w-full h-24 text-white z-10">
-                <div className="px-12 py-5">
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <h5 className="uppercase text-white/40 text-xs font-semibold">Connected To</h5>
-                            <p>{blockchain.account}</p>
+            <AnimatePresence initial={false} exitBeforeEnter={true} onExitComplete={() => null}>
+                {mintedModalOpen && (
+                    <motion.div
+                        className="h-screen flex justify-center items-center fixed z-30 bg-black"
+                        initial={{ scale: 0 }}
+                        animate={{ rotate: 360, scale: [0, 1.1, 1] }}
+                        transition={{
+                            type: 'spring',
+                            stiffness: 260,
+                            damping: 25,
+                        }}
+                        exit={{
+                            opacity: 0,
+                            scale: 0,
+                            transition: {
+                                duration: 0.15,
+                                ease: 'easeOut',
+                            },
+                        }}
+                    >
+                        <div className="px-4 md:px-0 md:w-1/3">
+                            <h4 className="text-white md:text-3xl text-center">
+                                Yeay!!! Already Minted. <br /> Check your NFT on Opensea!
+                            </h4>
+                            <div className="rounded-3xl overflow-hidden my-5">
+                                <video autoPlay muted loop>
+                                    <source src={mintedVideo} type="video/mp4" />
+                                </video>
+                            </div>
+                            <div className="flex justify-center">
+                                <button
+                                    className="px-12 py-3 bg-primary hover:bg-red-700 transition-all duration-300 ease-in-out text-white uppercase font-semibold rounded-md"
+                                    onClick={(e) => {
+                                        e.preventDefault()
+                                        closeMintedModal()
+                                    }}
+                                >
+                                    Close
+                                </button>
+                            </div>
                         </div>
-                        <div className="flex items-center divide-x divide-white/20">
-                            <div className="pr-10">
-                                <span className="uppercase text-white/40 text-xs font-semibold">Price</span>
-                                <p className="font-medium">{data.isFreeMintOpen ? 'Free' : data.cost}</p>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+            <AnimatePresence initial={false} exitBeforeEnter={true} onExitComplete={() => null}>
+                {claimingNft && (
+                    <motion.div
+                        className="fixed top-0 bg-black backdrop-filter backdrop-blur-xl h-screen w-full z-20"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5, type: 'tween' }}
+                    >
+                        <video autoPlay muted loop>
+                            <source src={loadingVideo} type="video/mp4" />
+                        </video>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+            <AnimatePresence initial={false} exitBeforeEnter={true} onExitComplete={() => null}>
+                {blockchain.account && blockchain.smartContract && !data.loading ? (
+                    <motion.div
+                        className="fixed inset-x-0 bottom-0 bg-primary w-full h-24 text-white z-10"
+                        initial={{ y: 300, opacity: 0 }}
+                        animate={{ y: 1, opacity: 1 }}
+                        exit={{ y: 300, opacity: 0 }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <div className="px-12 py-5">
+                            <div className="flex justify-between items-center">
+                                <div>
+                                    <h5 className="uppercase text-white/40 text-xs font-semibold">Connected To</h5>
+                                    <p>{blockchain.account}</p>
+                                </div>
+                                <div className="flex items-center divide-x divide-white/20">
+                                    <div className="pr-10">
+                                        <span className="uppercase text-white/40 text-xs font-semibold">Price</span>
+                                        <p className="font-medium">{data.isFreeMintOpen ? 'Free' : data.cost}</p>
+                                    </div>
+                                    <div className="px-10">
+                                        <span className="uppercase text-white/40 text-xs font-semibold">Amount</span>
+                                        <p className="font-medium">{minting.mintAmount[0]}x</p>
+                                    </div>
+                                    <div className="px-10">
+                                        <span className="uppercase text-white/40 text-xs font-semibold">Total</span>
+                                        <p className="font-medium">{data.isFreeMintOpen ? 'Free' : data.cost}</p>
+                                    </div>
+                                    <button
+                                        className="py-3 px-10 rounded-sm font-bold text-lg uppercase bg-white text-primary"
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            claimNFTs()
+                                            getData()
+                                        }}
+                                    >
+                                        Mint
+                                    </button>
+                                </div>
                             </div>
-                            <div className="px-10">
-                                <span className="uppercase text-white/40 text-xs font-semibold">Amount</span>
-                                <p className="font-medium">{minting.mintAmount[0]}x</p>
-                            </div>
-                            <div className="px-10">
-                                <span className="uppercase text-white/40 text-xs font-semibold">Total</span>
-                                <p className="font-medium">{data.isFreeMintOpen ? 'Free' : data.cost}</p>
-                            </div>
-                            <button
-                                className="py-3 px-10 rounded-sm font-bold text-lg uppercase bg-white text-primary"
-                                onClick={(e) => {
-                                    e.preventDefault()
-                                    claimNFTs()
-                                    getData()
-                                }}
-                            >
-                                Mint
-                            </button>
                         </div>
-                    </div>
-                </div>
-            </div>
+                    </motion.div>
+                ) : null}
+            </AnimatePresence>
         </>
     )
 }
