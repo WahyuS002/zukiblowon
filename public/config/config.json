@@ -1,10 +1,10 @@
 {
-    "CONTRACT_ADDRESS": "0xfB6dc16B2CbB4986ea713766C7C9239C019b9D66",
-    "SCAN_LINK": "https://etherscan.io/address/0xfB6dc16B2CbB4986ea713766C7C9239C019b9D66",
+    "CONTRACT_ADDRESS": "0x8A7AE2E953beFD68E74DbbC4aaC50bFf11537f1b",
+    "SCAN_LINK": "https://etherscan.io/address/0x8A7AE2E953beFD68E74DbbC4aaC50bFf11537f1b",
     "NETWORK": {
-        "NAME": "Rinkeby",
+        "NAME": "Ethereum",
         "SYMBOL": "ETH",
-        "ID": 4
+        "ID": 1
     },
     "NFT_NAME": "Zukiblowon",
     "SYMBOL": "ZUKIBLOWON",
