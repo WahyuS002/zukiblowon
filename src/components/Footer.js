@@ -58,13 +58,13 @@ export default function Footer() {
     const claimNFTs = () => {
         let cost = data.cost
         let gasLimit = CONFIG.GAS_LIMIT
-        let totalCostWei = String(cost * minting.mintAmount)
+        let totalCostWei = String(cost * minting.mintAmount[0])
 
         if (data.paused) {
             toast.info('Minting will open soon.')
         } else {
             console.log('Current Wallet Supply : ', data.currentWalletSupply)
-            if (parseInt(minting.mintAmount) + parseInt(data.totalSupply) > parseInt(data.maxSupply)) {
+            if (parseInt(minting.mintAmount[0]) + parseInt(data.totalSupply) > parseInt(data.maxSupply)) {
                 toast.warning('You have exceeded the max limit of minting.')
             } else {
                 if (data.isFreeMintOpen) {
@@ -77,15 +77,15 @@ export default function Footer() {
     }
 
     const freeMintTokens = (gasLimit) => {
-        if (parseInt(data.currentWalletSupply) + minting.mintAmount > parseInt(data.maxFreeMintAmountPerAddr)) {
+        if (parseInt(data.currentWalletSupply) + minting.mintAmount[0] > parseInt(data.maxFreeMintAmountPerAddr)) {
             toast.warning('Exceeds max free mint per wallet!')
-        } else if (parseInt(data.totalSupply) + minting.mintAmount > parseInt(data.maxFreeMintSupply)) {
+        } else if (parseInt(data.totalSupply) + minting.mintAmount[0] > parseInt(data.maxFreeMintSupply)) {
             toast.warning('Exceeds max free mint supply!')
         } else {
             toast.info(`Minting your free ${CONFIG.NFT_NAME}...`)
             setClaimingNft(true)
             return blockchain.smartContract.methods
-                .freeMint(minting.mintAmount)
+                .freeMint(minting.mintAmount[0])
                 .send({
                     gasLimit: gasLimit,
                     to: CONFIG.CONTRACT_ADDRESS,
@@ -96,7 +96,7 @@ export default function Footer() {
                     setClaimingNft(false)
                 })
                 .then(() => {
-                    toast.success(`WOW, the ${minting.mintAmount.NFT_NAME} is yours! go visit Opensea.io to view it.`)
+                    toast.success(`WOW, the ${CONFIG.NFT_NAME} is yours! go visit Opensea.io to view it.`)
                     setClaimingNft(false)
                     dispatch(fetchData(blockchain.account))
                     openMintedModal()
@@ -105,17 +105,17 @@ export default function Footer() {
     }
 
     const mintTokens = (gasLimit, totalCostWei) => {
-        if (minting.mintAmount > parseInt(data.maxMintAmountPerTx)) {
+        if (minting.mintAmount[0] > parseInt(data.maxMintAmountPerTx)) {
             toast.warning('Exceeds max mint amount per tx!')
-        } else if (parseInt(data.totalSupply) + minting.mintAmount > parseInt(data.maxSupply)) {
+        } else if (parseInt(data.totalSupply) + minting.mintAmount[0] > parseInt(data.maxSupply)) {
             toast.warning('Max supply exceeded!')
-        } else if (parseInt(data.currentWalletSupply) + minting.mintAmount > 20) {
+        } else if (parseInt(data.currentWalletSupply) + minting.mintAmount[0] > 20) {
             toast.warning('Exceeds max mint per wallet!')
         } else {
             toast.info(`Minting your ${CONFIG.NFT_NAME}...`)
             setClaimingNft(true)
             return blockchain.smartContract.methods
-                .mint(minting.mintAmount)
+                .mint(minting.mintAmount[0])
                 .send({
                     gasLimit: gasLimit,
                     to: CONFIG.CONTRACT_ADDRESS,
